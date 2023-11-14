@@ -19,7 +19,7 @@ jobs:
         python-version: 3.8
 
     - name: Install Dependencies
-      working-directory: /home/runner/work/NewlookTask/NewlookTask/Crud-api
+      working-directory: /home/runner/work/crudapi-cicd/Crud-api
       run: |
         pip install Flask
 
