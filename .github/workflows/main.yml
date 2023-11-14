@@ -24,7 +24,7 @@ jobs:
         pip install Flask
 
     - name: Build & Push Docker Image
-      working-directory: /home/runner/work/NewlookTask/NewlookTask/crud-api
+      working-directory: /home/runner/work/crudapi-cicd
       run: |
         docker build -t ${{ secrets.DOCKER_REGISTRY }}:latest .
         docker login -u ${{ secrets.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
@@ -37,7 +37,7 @@ jobs:
          
 
     - name: Deploy to AKS
-      working-directory: /home/runner/work/NewlookTask/NewlookTask/crud-api
+      working-directory: /home/runner/work/crudapi-cicd
       run: |
         az aks get-credentials --resource-group dev-aks-rg --name dev-aks-cluster --overwrite-existing
         kubectl apply -f deploy.yaml
