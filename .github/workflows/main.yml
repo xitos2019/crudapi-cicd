@@ -36,9 +36,8 @@ jobs:
       
       working-directory: /home/runner/work/crudapi-cicd
       run: |
-        echo pwd
+        pwd
         docker build -t ${{ secrets.DOCKER_REGISTRY }}:python .
-        docker login -u ${{ secrets.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
         docker push ${{ secrets.DOCKER_REGISTRY }}:python
      
     - name: 'Az CLI login'
