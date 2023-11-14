@@ -26,9 +26,9 @@ jobs:
     - name: Build & Push Docker Image
       working-directory: /home/runner/work/crudapi-cicd
       run: |
-        docker build -t ${{ secrets.DOCKER_REGISTRY }}:latest .
+        docker build -t ${{ secrets.DOCKER_REGISTRY }}:python .
         docker login -u ${{ secrets.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-        docker push ${{ secrets.DOCKER_REGISTRY }}:latest
+        docker push ${{ secrets.DOCKER_REGISTRY }}:python
      
     - name: 'Az CLI login'
       uses: azure/login@v1
