@@ -22,10 +22,7 @@ jobs:
       working-directory: /home/runner/work/crudapi-cicd/crudapi-cicd/crud-api
       run: |
         pip install Flask
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+        
     - name: Configure Docker
       uses: azure/docker-login@v1
       with:
