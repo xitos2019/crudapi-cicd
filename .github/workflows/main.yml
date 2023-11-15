@@ -33,7 +33,7 @@ jobs:
         username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
         password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     - name: Build & Push Docker Image
-      working-directory: /home/runner/work/crudapi-cicd/crud-api
+      working-directory: /home/runner/work/crudapi-cicd/crudapi-cicd/crud-api
       run: |
         pwd
         docker build -t ${{ secrets.DOCKER_REGISTRY }}:python .
