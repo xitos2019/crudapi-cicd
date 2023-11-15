@@ -19,7 +19,7 @@ jobs:
         python-version: 3.8
 
     - name: Install Dependencies
-      working-directory: /home/runner/work/crudapi-cicd
+      working-directory: /home/runner/work/crudapi-cicd/crud-api
       run: |
         pip install Flask
   deploy:
@@ -33,8 +33,7 @@ jobs:
         username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
         password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
     - name: Build & Push Docker Image
-      
-      working-directory: /home/runner/work/crudapi-cicd
+      working-directory: /home/runner/work/crudapi-cicd/crud-api
       run: |
         pwd
         docker build -t ${{ secrets.DOCKER_REGISTRY }}:python .
@@ -44,8 +43,6 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-         
-
     - name: Deploy to AKS
       working-directory: /home/runner/work/crudapi-cicd
       run: |
