@@ -35,7 +35,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Deploy to AKS
-      working-directory: /home/runner/work/crudapi-cicd
+      working-directory: /home/runner/work/crudapi-cicd/crudapi-cicd/crud-api
       run: |
         az aks get-credentials --resource-group dev-aks-rg --name dev-aks-cluster --overwrite-existing
         kubectl apply -f deploy.yaml
