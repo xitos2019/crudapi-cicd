@@ -37,5 +37,5 @@ jobs:
     - name: Deploy to AKS
       working-directory: /home/runner/work/crudapi-cicd/crudapi-cicd/crud-api
       run: |
-        az aks get-credentials --resource-group dev-aks-rg --name dev-aks-cluster --overwrite-existing
+        az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --overwrite-existing
         kubectl apply -f deploy.yaml
