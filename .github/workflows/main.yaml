@@ -1,0 +1,41 @@
+name: Deploy to AKS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install Dependencies
+      working-directory: /home/runner/work/crudapi-cicd/crudapi-cicd/crud-api
+      run: |
+        pip install Flask
+        
+    - name: Build & Push Docker Image
+      working-directory: /home/runner/work/crudapi-cicd/crudapi-cicd/crud-api
+      run: |
+        docker build -t ${{ secrets.DOCKER_REGISTRY }}:latest .
+        docker login -u ${{ secrets.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+        docker push ${{ secrets.DOCKER_REGISTRY }}:latest
+     
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Deploy to AKS
+      working-directory: /home/runner/work/crudapi-cicd/crudapi-cicd/crud-api
+      run: |
+        az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --overwrite-existing
+        kubectl apply -f deploy.yaml
