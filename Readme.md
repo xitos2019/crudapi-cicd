@@ -41,10 +41,22 @@ and create below secrets to authenticate DockerHub Registery and Azure with Gith
 
 **CICD Pipeline** 
 
-I have created GITHUB Action CICD pipeline as yaml and configured 3 tasks.
+I have created GITHUB Action CICD pipeline as yaml `.github/workflows/main.yaml` and configured 3 tasks .
 
 * Build Dependencies 
 * Build and push Docker image
 * Deploy onto AKS cluster
 
+Once all the tasks runs successfully we should see one application pod and service running.
 
+kubectl get po
+![Alt text](image-1.png)
+kubectl get svc
+![Alt text](image-2.png)
+below is curl output from service endpoint which confirms connectivity with our API.
+
+```
+curl 20.90.68.228/tasks
+{"tasks":[{"description":"Description 1","done":false,"id":1,"title":"Task 1"},{"description":"Description 2","done":false,"id":2,"title":"Task 2"}]}
+```
+![Alt text](image.png)
